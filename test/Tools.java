@@ -49,7 +49,7 @@ public class Tools {
 				CloseableHttpClient httpclient = HttpClients.createDefault();
 				HttpGet httpGet = new HttpGet(remoteUrl);
 				//add timeout para
-				RequestConfig config = RequestConfig.custom().setConnectTimeout(20000).setSocketTimeout(20000).build(); 
+				RequestConfig config = RequestConfig.custom().setConnectTimeout(20000).setSocketTimeout(50000).build(); 
 				httpGet.setConfig(config);
 				httpGet.setHeader(
 						"User-Agent",
@@ -232,7 +232,7 @@ public class Tools {
 //		 getPic("http://imagetwist.com/rsd035pat05r/032.jpg");
 //		getPic("http://imagddetwist.com/rsd035paddt05r/032.jpg");
 		
-		getPic("http://img2.uploadhouse.com/jjfileuploads/23553/aa23553232f30f3031df17ea7a9a4ddee8a5d9e0c0.jpg","");
+		getPic("http://img8.uploadhouse.com/fileuploads/23611/236117185594562ef161bd4e0d9df3e15e113bac.jpg","");
 		
 		getPic("https://s29.postimg.org/gmautgsgn/0c93c8cfda19184c7e8b03d979e1dfce.jpg","");
 		
@@ -269,3 +269,6 @@ public class Tools {
  * 1.6中对mkdirs方法针对1.5进行了改进，使得mkdirs可以在多线程中使用？ 文件操作分析以及常用套路，目录，文件，递归思想
  * 多线程爬取和文件写入问题 正则表达式使用 html标签解析,regex过滤以及jSoup解析 单元测试思想 多线程和线程池
  */
+
+//main函数中的测试例子，如果不配置超时可能导致一直阻塞，网络问题or网盘服务器问题
+//设置超时可能会出现图片部分下载的情况

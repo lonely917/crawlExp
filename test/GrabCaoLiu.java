@@ -9,19 +9,23 @@ import java.util.Properties;
 
 public class GrabCaoLiu {
 
-	static String baseUrl = "http://dz.x8h.biz/";
+	static String baseUrl = "http://dz.3ql.info/";//网址
+	static String targetCategory = "http://dz.3ql.info/thread0806.php?fid=16&page=";//目标版块
 	static int start = 1;
 	static int end = 2;
+	static Boolean timeout = true; 
 	
 	//初始化参数
 	static
 	{
 		Properties pro = new Properties();
 		try {
-			pro.load(new FileInputStream("configGrabCaoLiu"));
-			baseUrl = (String) pro.get("baseUrl");
-			start = Integer.parseInt(pro.getProperty("start"));
-			end = Integer.parseInt(pro.getProperty("end"));
+			pro.load(new FileInputStream("configGrabCaoLiu"));//Properties加载配置文件
+			baseUrl = (String) pro.get("baseUrl");//网址
+			targetCategory = (String) pro.getProperty("targetCategory");//目标版块
+			start = Integer.parseInt(pro.getProperty("start"));//目标版块起始页面
+			end = Integer.parseInt(pro.getProperty("end"));//目标版块结束页面
+			Tools.timeout = Boolean.parseBoolean(pro.getProperty("timeout"));//是否设置超时
 			pro.list(System.out);
 		} catch(Exception e){
 			Tools.log("exception", e.toString());
@@ -60,7 +64,7 @@ public class GrabCaoLiu {
 	{
 			for(int i=start;i<=end;i++)
 			{
-				String remoteUrl = "http://dz.x8h.biz/thread0806.php?fid=16&page="+i;
+				String remoteUrl = targetCategory+i;
 				String html = Tools.getHtml(remoteUrl);
 				List<String> urls  = Tools.parseUrlsFromHtml(html, "a", true);
 				for (String url : urls) {

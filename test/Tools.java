@@ -22,6 +22,7 @@ import org.apache.http.util.EntityUtils;
  */
 public class Tools {
 
+	static Boolean timeout = true;
 	/**
 	 * @param name
 	 * @param remoteUrl
@@ -48,9 +49,13 @@ public class Tools {
 			try {
 				CloseableHttpClient httpclient = HttpClients.createDefault();
 				HttpGet httpGet = new HttpGet(remoteUrl);
+				
 				//add timeout para
-				RequestConfig config = RequestConfig.custom().setConnectTimeout(20000).setSocketTimeout(50000).build(); 
-				httpGet.setConfig(config);
+				if(timeout)
+				{
+					RequestConfig config = RequestConfig.custom().setConnectTimeout(20000).setSocketTimeout(50000).build(); 
+					httpGet.setConfig(config);	
+				}
 				httpGet.setHeader(
 						"User-Agent",
 						"Mozilla/4.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3");

@@ -175,7 +175,7 @@ public class Tools {
 		return result;
 	}
 
-	// 手动实现检索，不借助开源工具
+	// 手动实现检索，不借助开源工具，这里所有src都是“”而不是‘’
 	public static List<String> parseUrlsFromHtml(String content, String tag,
 			Boolean isAll) {
 		List<String> urls = new ArrayList<String>();

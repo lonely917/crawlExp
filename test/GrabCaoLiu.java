@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * 1024对应某一子版块图片爬取
+ * 注意页面元素img与input以及src属性使用‘’而非“”
+ * 
+ * @author yan
+ *
+ */
 public class GrabCaoLiu {
 
 	static String baseUrl = "http://dz.3ql.info/";//网址
@@ -32,6 +39,15 @@ public class GrabCaoLiu {
 		}
 	}
 
+	/**
+	 * 从html页面数据解析出tag标签数据集合，tag支持img、input、以及a(超链接)
+	 * 注意这里src属性对应的是单引号
+	 * 这里不同于Tools类中的parseUrlsFromHtml就是src属性为‘’标记而非“”
+	 * @param content	html页面内容
+	 * @param tag	标签类型
+	 * @param isAll	true表示所有结果，false表示解析出绝对地址以http开头的元素
+	 * @return
+	 */
 	public static List<String> parseUrlsFromHtml(String content, String tag, Boolean isAll)
 	{
 		List<String> urls = new ArrayList<String>();
@@ -82,6 +98,11 @@ public class GrabCaoLiu {
 			
 	}
 
+	/**
+	 * 获取目标html页面中所有的图片 img标签的图片
+	 * 格式为img src=‘....’单引号这种
+	 * @param remoteUrl 目标页面地址
+	 */
 	public static void getHtmlImgs(String remoteUrl) {
 		String html = Tools.getHtml(remoteUrl);
 //		System.out.println(html);
@@ -100,6 +121,11 @@ public class GrabCaoLiu {
 		new GrabCaoLiu().doWork();
 	}
 
+	/**
+	 * 获取目标html页面中所有的图片 input标签的图片
+	 * 格式为input src=‘....’单引号这种
+	 * @param remoteUrl 目标页面地址
+	 */
 	public static void getHtmlInputs(String remoteUrl) {
 		String html = Tools.getHtml(remoteUrl);
 //		System.out.println(html);
